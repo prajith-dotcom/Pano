@@ -1,0 +1,130 @@
+<h1 mat-dialog-title>Dispute Transaction</h1>
+<div mat-dialog-content>
+  <div *ngIf="state === 'loading'">
+    <mat-progress-bar mode="indeterminate" style="padding-top: 1%"></mat-progress-bar>
+
+  </div>
+    
+  <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
+    <ng-template matStepperIcon="edit">
+      <mat-icon>check</mat-icon>
+    </ng-template>
+    <mat-step [stepControl]="disputeForm">
+      <form [formGroup]="disputeForm">
+        <ng-template matStepLabel>Dispute Information</ng-template>
+        <div>
+          <mat-form-field style="width: 30%; padding-right: 3%">
+            <mat-select placeholder="Source" formControlName="source">
+              <mat-option *ngFor="let source of sources" [value]="source.name">
+                {{source.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field style="width: 30%; padding-right: 3%">
+            <mat-select placeholder="Issue Selection" formControlName="issue">
+              <mat-option *ngFor="let issue of issues" [value]="issue.name" [disabled]="false">
+                {{issue.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field style="width: 30%">
+            <mat-select placeholder="Language" formControlName="language">
+              <mat-option value="English">
+                English
+              </mat-option>
+              <mat-option value="English">
+                Spanish
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field style="width: 30%; padding-right: 3%">
+            <mat-select placeholder="Group Assigned" formControlName="groupAssigned">
+              <mat-option value="Retail">Retail</mat-option>
+              <mat-option value="Card Operations">Card Operations</mat-option>
+              <mat-option value="Customer Support">Customer Support</mat-option>
+              <mat-option value="CSU">CSU</mat-option>
+              <mat-option value="Legal and Compliance">Legal and Compliance</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field style="width: 30%; padding-right: 3%">
+            <input matInput placeholder="Date Received" formControlName="receivedDate" [matDatepicker]="receivedDate">
+
+            <mat-datepicker-toggle matSuffix [for]="receivedDate"></mat-datepicker-toggle>
+            <mat-datepicker #receivedDate></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field style="width: 30%">
+            <mat-select placeholder="Contact Method" formControlName="contactMethod">
+              <mat-option value="Electronic">
+                Electronic
+              </mat-option>
+              <mat-option value="Written">
+                Written
+              </mat-option>
+              <mat-option value="Phone">
+                Phone
+              </mat-option>
+              <mat-option value="Email">
+                Email
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div style="width: 100%">
+          <mat-form-field style="width: 100%">
+            <textarea matInput matTextareaAutosize matAutosizeMinRows="3" formControlName="narrative" placeholder="Description of Dispute"></textarea>
+          </mat-form-field>
+        </div>
+
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="contactInfoForm">
+      <form [formGroup]="contactInfoForm">
+        <ng-template matStepLabel>Contact Information</ng-template>
+        <div>
+          <mat-form-field style="width: 30%; padding-right: 3%">
+            <input matInput placeholder="Address Line 1" formControlName="address1">
+          </mat-form-field>
+          <mat-form-field style="width: 30%; padding-right: 3%">
+            <input matInput placeholder="Address Line 2" formControlName="address2">
+          </mat-form-field>
+          <mat-form-field style="width: 30%">
+            <input matInput placeholder="City" formControlName="city">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field style="width: 30%; padding-right: 3%">
+            <input matInput placeholder="Country" formControlName="country">
+          </mat-form-field>
+          <mat-form-field style="width: 30%; padding-right: 3%">
+            <input matInput placeholder="State" formControlName="state">
+          </mat-form-field>
+          <mat-form-field style="width: 30%">
+            <input matInput placeholder="Postal Code" formControlName="postalCode">
+          </mat-form-field>
+
+        </div>
+        <div>
+          <mat-form-field style="width: 30%; padding-right: 3%">
+            <input matInput placeholder="Phone Number" formControlName="phoneNumber">
+          </mat-form-field>
+          <mat-form-field style="width: 30%">
+            <input matInput placeholder="Email" formControlName="email">
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Questionnaire</ng-template>
+      <pan-questionnaire [(ticket)]="ticket" (stateChange)="onQuestionnaireStateChange($event)" (questionnaireCanceled)="onQuestionnaireCanceled()"></pan-questionnaire>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" (click)="logDispute()" [disabled]="state === 'in progress'">{{ this.stepper.selectedIndex < 2 ? 'Next' : 'Submit Ticket' }}</button>
+  <button mat-raised-button *ngIf="this.stepper.selectedIndex < 2" (click)="onNoClick()" color="secondary">Cancel</button>
+</div>

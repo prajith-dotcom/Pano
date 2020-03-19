@@ -1,0 +1,30 @@
+<div style="flex: 100%; padding: 1%">
+  <div *ngFor="let row of rows" style="display: flex;" [ngStyle]="{ 'padding-bottom': state === 'editable' ? 0 : '1%', 'font-size': '11pt', 'padding': '1%' }">
+    <div *ngFor="let field of row" style="flex: 20%;">
+      <div *ngIf="state === 'editable'; else static" style="display: flex; flex-direction: row">
+        <mat-form-field style="width: 80%!important" [ngStyle]="{ 'width': field.width ? field.width : '80%' }" *ngIf="field.modelName; else blank"
+          [floatLabel]="'always'">
+          <input *ngIf="field.nested; else notNested" matInput [(ngModel)]="model[field.nested][field.modelName]" placeholder="{{ field.label }}" type="field.type" class="text-field">
+          <ng-template #notNested>
+            <input #notNested matInput [(ngModel)]="model[field.modelName]" placeholder="{{ field.label }}" type="field.type" class="text-field">
+          </ng-template>
+        </mat-form-field>
+      </div>
+      <ng-template #static>
+        <div *ngIf="field.modelName; else blank">
+          <div *ngIf="field.date; else notDate">
+            <b>{{ field.label }}:</b>
+            {{ getNested(model, field.modelName, field.nested) | date: 'MM/dd/yyyy' }}
+          </div>
+          <ng-template #notDate>
+            <b>{{ field.label }}:</b>
+            {{ getNested(model, field.modelName, field.nested) }}
+          </ng-template>
+        </div>
+      </ng-template>
+      <ng-template #blank>
+
+      </ng-template>
+    </div>
+  </div>
+</div>

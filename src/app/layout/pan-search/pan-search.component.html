@@ -1,0 +1,51 @@
+<div class="pan__wrapper" *ngIf="customers.length > 0; else noResults">
+  <mat-card style="padding: 0">
+    <mat-table #table [dataSource]="dataSource">
+      <!-- Customer No. Column -->
+      <ng-container matColumnDef="customerNumber">
+        <mat-header-cell *matHeaderCellDef class="number-cell"> Customer Number </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="number-cell"> {{ element.customer_number }} </mat-cell>
+      </ng-container>
+
+      <!-- Customer Name Column -->
+      <ng-container matColumnDef="customerName">
+        <mat-header-cell *matHeaderCellDef class="name-cell"> Customer Name </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="name-cell"> {{ element.legal_name }} </mat-cell>
+      </ng-container>
+
+      <!-- Customer Birth Date Column -->
+      <ng-container matColumnDef="birthDate">
+        <mat-header-cell *matHeaderCellDef class="date-cell"> Date of Birth </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="date-cell"> {{ element.date_of_birth | date:'MM/dd/yyyy' }} </mat-cell>
+      </ng-container>
+
+      <!-- Customer SSN -->
+      <ng-container matColumnDef="ssn">
+        <mat-header-cell *matHeaderCellDef class="date-cell"> SSN </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="date-cell"> {{ element.identification.ssn }} </mat-cell>
+      </ng-container>
+
+      <!-- Customer Status -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef class="date-cell"> Status </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="date-cell"> {{ element.kyc_status | uppercase }} </mat-cell>
+      </ng-container>
+
+      <!-- Row Elements -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row class="search__row" *matRowDef="let row; columns: displayedColumns;" (click)="setCustomer(row)" matRipple>
+      </mat-row>
+    </mat-table>
+    <!-- Pagination -->
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="false">
+    </mat-paginator>
+  </mat-card>
+
+</div>
+<ng-template #noResults>
+  <div class="pan__wrapper">
+    <mat-card>
+      <h3>No Customers found</h3>
+    </mat-card>
+  </div>
+</ng-template>

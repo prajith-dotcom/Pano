@@ -1,0 +1,26 @@
+@import '../../../styles/shared.scss';
+.detail-row {
+  overflow: hidden;
+  background-color: #f5f5f5 !important;
+}
+
+.mat-column-description {
+  flex: 0 0 250px
+}
+
+.mat-column-action {
+  flex: 0 0 100px
+}
+.mat-column-slaDate {
+  flex: 0 0 200px
+}
+.mat-column-createdDate {
+  flex: 0 0 200px
+}
+// .row {
+//   position: relative;
+//   cursor: pointer;  
+// }
+// .row:hover {
+//   background: #f5f5f5;
+// }

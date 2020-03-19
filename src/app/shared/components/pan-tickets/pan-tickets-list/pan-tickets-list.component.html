@@ -1,0 +1,118 @@
+<div id="tickets-table">
+  <div class="header" style="border-bottom: 1px solid rgb(168, 168, 168)">
+
+    <!-- Description Filter -->
+    <mat-form-field class="small-txt">
+      <input matInput (keyup)="onFilterInputChange()" placeholder="Ticket Number" [(ngModel)]="filters.ticketNumber">
+    </mat-form-field>
+
+    <!-- Date From Filter -->
+    <mat-form-field class="small-txt">
+      <input matInput placeholder="Date From" (dateChange)="onFilterInputChange()" [matDatepicker]="fromPicker" [(ngModel)]="filters.fromDate">
+
+      <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+      <mat-datepicker #fromPicker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Date To Filter -->
+    <mat-form-field class="small-txt">
+      <input matInput placeholder="Date To" (dateChange)="onFilterInputChange()" [matDatepicker]="toPicker" [(ngModel)]="filters.toDate">
+
+      <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+      <mat-datepicker #toPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="small-txt">
+      <mat-select (selectionChange)="onFilterInputChange()" [(ngModel)]="filters.group" placeholder="Group">
+        <mat-option value="Retail">Retail</mat-option>
+        <mat-option value="Card Operations">Card Operations</mat-option>
+        <mat-option value="Customer Support">Customer Support</mat-option>
+        <mat-option value="CSU">CSU</mat-option>
+        <mat-option value="Legal and Compliance">Legal and Compliance</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Reset Button -->
+    <div style="margin-top: 0.5%">
+      <button mat-raised-button color="primary" [disabled]="filterState === 'idle'" (click)="resetFilters()">
+        Reset
+      </button>
+    </div>
+
+  </div>
+  <div *ngIf="state === 'loading'">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <div *ngIf="dataSource">
+    <mat-table #table [dataSource]="dataSource" *ngIf="dataSource.filteredData.length > 0 ; else noTickets">
+      <!-- Ticket Nr. Column -->
+      <ng-container matColumnDef="ticketNumber">
+        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+        <mat-cell *matCellDef="let ticket"> {{ticket.ticketNumber}} </mat-cell>
+      </ng-container>
+
+      <!-- Ticket Name Column -->
+      <ng-container matColumnDef="dateReceived">
+        <mat-header-cell *matHeaderCellDef> Date Received </mat-header-cell>
+        <mat-cell *matCellDef="let ticket"> {{ticket.receivedDate | date:'MM/dd/yyyy, h:mm:ss a'}} </mat-cell>
+      </ng-container>
+
+      <!-- Date Received Column -->
+      <ng-container matColumnDef="sla">
+        <mat-header-cell *matHeaderCellDef> Due Date </mat-header-cell>
+        <mat-cell *matCellDef="let ticket"> {{ticket.sla | date:'MM/dd/yyyy, h:mm:ss a'}} </mat-cell>
+      </ng-container>
+
+      <!-- Source Column -->
+      <ng-container matColumnDef="source">
+        <mat-header-cell *matHeaderCellDef> Source </mat-header-cell>
+        <mat-cell *matCellDef="let ticket"> {{setToNAIfUndefined(ticket.requestor.sourceApp)}} </mat-cell>
+      </ng-container>
+
+
+      <!-- Assigned Column -->
+      <ng-container matColumnDef="assigned">
+        <mat-header-cell *matHeaderCellDef> Assigned </mat-header-cell>
+        <mat-cell *matCellDef="let ticket"> {{setToNAIfUndefined(ticket.assignTo.user.description)}} </mat-cell>
+      </ng-container>
+
+      <!-- Group Column -->
+      <ng-container matColumnDef="groupAssigned">
+        <mat-header-cell *matHeaderCellDef> Group </mat-header-cell>
+        <mat-cell *matCellDef="let ticket"> {{setToNAIfUndefined(ticket.assignTo.group.description)}} </mat-cell>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let ticket">
+          <mat-chip [color]="ticket.status.description === 'Escalated' ? 'warn' : 'primary'" [selected]="ticket.status.description !== 'Open'" disabled="true">
+            {{setToNAIfUndefined(ticket.status.description)}}
+          </mat-chip>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Row Elements -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple (click)="selectedTicket = row" class="row">
+      </mat-row>
+    </mat-table>
+
+  </div>
+
+  <ng-template #noTickets>
+    <div style="text-align: center;">
+      <h4>No Tickets to Display</h4>
+    </div>
+  </ng-template>
+
+  <!-- Pagination -->
+  <mat-paginator
+    [pageIndex]="pageIndex"
+    [length]="pageLength"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="pageChanged($event)">
+  </mat-paginator>
+
+</div>

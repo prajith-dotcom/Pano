@@ -1,0 +1,29 @@
+<div [formGroup]="form">
+  <h3>Primary Address</h3>
+  <mat-form-field style="width: 48%; padding-right: 4%">
+    <input matInput placeholder="Address Line 1" formControlName="address1">
+  </mat-form-field>
+  <mat-form-field style="width: 48%;">
+    <input matInput placeholder="Address Line 2" formControlName="address2">
+  </mat-form-field>
+  <mat-form-field style="width: 48%; padding-right: 4%">
+    <input matInput placeholder="City" formControlName="city">
+  </mat-form-field>
+  <mat-form-field style="width: 20%; padding-right: 4%">
+    <mat-select placeholder="State Issued" formControlName="state">
+      <mat-option *ngFor="let state of states" [value]="state.code">
+        {{ state.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="width: 20%">
+    <input matInput placeholder="Zip Code" formControlName="postalCode">
+  </mat-form-field>
+  <h3>Contact Information</h3>
+  <mat-form-field style="width: 48%; padding-right: 4%">
+    <input type="text" mask="000-000-0000" matInput placeholder="Phone Number" formControlName="phoneNumber">
+  </mat-form-field>
+  <mat-form-field style="width: 48%;">
+    <input matInput placeholder="Email" formControlName="email">
+  </mat-form-field>
+</div>

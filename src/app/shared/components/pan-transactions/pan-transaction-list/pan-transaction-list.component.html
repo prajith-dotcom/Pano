@@ -1,0 +1,160 @@
+<div id="transactions-table">
+  <div class="header" style="border-bottom: 1px solid rgb(168, 168, 168)" *ngIf="showHeader">
+
+    <!-- Description Filter -->
+    <mat-form-field class="small-txt">
+      <input 
+        matInput
+        (keyup)="onFilterInputChange()"
+        placeholder="Description" 
+        [(ngModel)] ="filters.narrative">
+    </mat-form-field>
+
+    <!-- Date From Filter -->
+    <mat-form-field class="small-txt">
+      <input 
+        matInput 
+        placeholder="Date From"
+        (dateChange)="onFilterInputChange()"
+        [matDatepicker]="fromPicker" 
+        [(ngModel)] ="filters.fromDate">
+      
+      <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+      <mat-datepicker #fromPicker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Date To Filter -->
+    <mat-form-field class="small-txt">
+      <input
+        matInput
+        placeholder="Date To"
+        (dateChange)="onFilterInputChange()"
+        [matDatepicker]="toPicker"
+        [(ngModel)] ="filters.toDate">
+    
+      <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+      <mat-datepicker #toPicker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Amount Min -->
+    <mat-form-field class="small-txt">
+      <input
+        matInput
+        type="number"
+        placeholder="Amount Min"
+        class="align-right"        
+        (keyup)="onFilterInputChange()"
+        [(ngModel)] ="filters.amountMin">  
+        <span matPrefix>$&nbsp;</span>
+    </mat-form-field>
+
+    <!-- Amount Max -->
+    <mat-form-field class="small-txt">
+      <input
+        matInput
+        type="number"
+        placeholder="Amount Max"
+        class="align-right"
+        (keyup)="onFilterInputChange()"
+        [(ngModel)]="filters.amountMax">
+        <span matPrefix>$&nbsp;</span>
+    </mat-form-field>
+
+    <!-- Reset Button -->
+    <div style="margin-top: 0.5%">
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="filterState === 'idle'"
+        (click)="resetFilters()">
+        Reset
+      </button>
+    </div>
+    
+  </div>
+  <!-- Transactions Table -->
+  <div *ngIf="dataSource; else loading">
+    <mat-table #table [dataSource]="dataSource" *ngIf="dataSource.filteredData.length > 0 ; else noTransactions">
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef style="overflow: hidden; flex-grow: .8">
+          <div style="width: 70%; overflow: hidden">
+            <button 
+              mat-raised-button
+              (click)="openDisputeDialog()"
+              color="primary"
+              [disabled]="selection.selected.length < 1"
+              [matTooltipDisabled]="selection.selected.length > 0"
+              matTooltip="This is the tooltip message">
+              Dispute
+            </button>
+          </div> 
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row" style="flex-grow: .8">
+          <mat-checkbox
+            color="primary"
+            (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Transaction No. Column -->
+      <ng-container matColumnDef="transactionNumber">
+        <mat-header-cell *matHeaderCellDef class="number-cell"> No. </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="number-cell"> {{ element.id }} </mat-cell>
+      </ng-container>
+
+      <!-- Posted Date Column -->
+      <ng-container matColumnDef="postedDate">
+        <mat-header-cell *matHeaderCellDef class="date-cell"> Posted Date </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="date-cell"> {{ element.details.posted | date:'MM/dd/yyyy, hh:mm:ss a' }} </mat-cell>
+      </ng-container>
+
+      <!-- Description Column -->
+      <ng-container matColumnDef="narrative">
+        <mat-header-cell *matHeaderCellDef> Narrative </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.metadata.narrative}} </mat-cell>
+      </ng-container>
+
+      <!-- Amount Column -->
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.details.value.amount | currency }} </mat-cell>
+      </ng-container>
+      
+      <!-- New Balance Column -->
+      <ng-container matColumnDef="newBalance">
+        <mat-header-cell *matHeaderCellDef> New Balance </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.details.new_balance.amount | currency }} </mat-cell>
+      </ng-container>
+
+      <!-- Row Elements -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"
+        matRipple
+        class="row">
+      </mat-row>
+
+    </mat-table>
+  </div>
+
+  <!-- No Transactions Templaye -->
+  <ng-template #noTransactions>
+    <div style="text-align: center; padding-top: 2%">
+      No Transactions to Display
+    </div>
+  </ng-template>
+
+  <ng-template #loading>
+    <mat-progress-bar mode="indeterminate" style="padding-top: 1%"></mat-progress-bar>
+  </ng-template>
+
+  <!-- Pagination -->
+  <mat-paginator 
+    #paginator
+    [pageSize]="20"
+    [pageSizeOptions]="[5, 10, 20]"
+    [showFirstLastButtons]="false">
+  </mat-paginator>
+</div>

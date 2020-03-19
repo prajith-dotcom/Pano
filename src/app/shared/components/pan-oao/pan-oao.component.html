@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Account Origination</h1>
+<div mat-dialog-content>    
+  <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
+    <ng-template matStepperIcon="edit">
+      <mat-icon>check</mat-icon>
+    </ng-template>
+    <mat-step [stepControl]="basicInfoForm">
+      <ng-template matStepLabel>Account Information</ng-template>
+      <pan-basic-info [formGroup]="basicInfoForm"></pan-basic-info>
+      <div>
+        <button mat-raised-button matStepperNext type="button" color="primary">Next</button>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="contactInfoForm">
+      <ng-template matStepLabel>Contact Information</ng-template>
+      <pan-contact-information [formGroup]="contactInfoForm"></pan-contact-information>
+      <div>
+        <button mat-raised-button matStepperPrevious type="button" style="margin-right: 1%;">Back</button>
+        <button mat-raised-button matStepperNext type="button" color="primary">Next</button>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="fundForm">
+      <ng-template matStepLabel>Account Activity</ng-template>
+      <pan-fund-account [formGroup]="fundForm" [accounts]="customer.accounts"></pan-fund-account>
+      <div>
+        <button mat-raised-button matStepperPrevious type="button" style="margin-right: 1%;">Back</button>
+        <button mat-raised-button (click)="close()" [disabled]="fundForm.invalid" type="button" color="primary">Submit</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+<!-- <div mat-dialog-actions align="center">
+</div> -->

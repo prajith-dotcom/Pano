@@ -1,0 +1,14 @@
+.row {
+    display: flex;
+    flex-direction: row;
+    // align-items: center;
+    justify-content: space-between;
+  }
+
+form {
+  padding-top: 4%;
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}

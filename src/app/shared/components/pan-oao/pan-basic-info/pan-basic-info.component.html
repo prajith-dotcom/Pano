@@ -1,0 +1,67 @@
+<div [formGroup]="form">
+  <mat-form-field style="width: 48%; padding-right: 4%">
+    <mat-select placeholder="Account Type" formControlName="accountType">
+      <mat-option value="Checking">
+        Checking
+      </mat-option>
+      <mat-option value="Savings">
+        Savings
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="width: 48%;">
+    <input matInput placeholder="Nick Name" formControlName="accountName">      
+  </mat-form-field>
+  <h3>Customer Information</h3>
+  <mat-form-field style="width: 32%; padding-right: 4%">
+    <input matInput placeholder="First Name" formControlName="firstName">
+  </mat-form-field>
+  <mat-form-field style="width: 12%; padding-right: 4%">
+    <input type="text" mask="S" matInput placeholder="M.I." formControlName="middleInitial">
+  </mat-form-field>
+  <mat-form-field style="width: 32%; padding-right: 4%;">
+    <input matInput placeholder="Last Name" formControlName="lastName">
+  </mat-form-field>
+  <mat-form-field style="width: 12%">
+    <input matInput placeholder="Suffix" formControlName="suffix">
+  </mat-form-field>
+  <mat-form-field style="width: 48%; padding-right: 4%">
+    <input matInput placeholder="Date Of Birth" formControlName="dateOfBirth" [value]="date.value" [matDatepicker]="dobPicker">
+    <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+    <mat-datepicker #dobPicker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field style="width: 48%;">
+    <input type="text" mask="000-00-0000" matInput placeholder="Social Security Number" formControlName="ssn">
+  </mat-form-field>
+  <h3>ID Verification</h3>
+  <mat-form-field style="width: 100%;">
+    <mat-select placeholder="Identification Type" formControlName="idType">
+      <mat-option value="Driver's License">
+        Driver's License
+      </mat-option>
+      <mat-option value="Passport">
+        Passport
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="width: 22%; padding-right: 4%">
+    <input matInput placeholder="ID Number" formControlName="idNumber">
+  </mat-form-field>
+  <mat-form-field style="width: 22%; padding-right: 4%;">
+    <mat-select placeholder="State Issued" formControlName="issuedLocation">
+      <mat-option *ngFor="let state of states" [value]="state.name">
+        {{ state.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="width: 22%; padding-right: 4%">
+    <input matInput placeholder="Date Issued" formControlName="issuedDate" [matDatepicker]="issuedDatePicker">
+    <mat-datepicker-toggle matSuffix [for]="issuedDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #issuedDatePicker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field style="width: 22%">
+    <input matInput placeholder="Expiration Date" formControlName="expDate" [matDatepicker]="expDatePicker">
+    <mat-datepicker-toggle matSuffix [for]="expDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #expDatePicker></mat-datepicker>
+  </mat-form-field>
+</div>

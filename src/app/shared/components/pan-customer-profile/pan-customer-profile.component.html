@@ -1,0 +1,21 @@
+<mat-expansion-panel
+  class="pan__card__wrapper mat-elevation-z0" 
+  [expanded]="panelState ==='open'"
+  (expandedChange)="panelChange($event)">
+<mat-expansion-panel-header class="pan__card__header">
+  <mat-panel-title class="pan__card__header__title">
+    <h2>Customer Profile</h2>
+  </mat-panel-title>
+</mat-expansion-panel-header>
+<mat-list>
+  <img style="width: 100%" src="https://i.ytimg.com/vi/bFVb4uZbGvI/maxresdefault.jpg" alt="customer-image">
+  <mat-divider></mat-divider>
+  <mat-list-item>{{customer.mobile_phone_number}}</mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>{{customer.email}}</mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>{{customer.address.address1}} {{customer.address.city}}</mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>VIP - Tier 2</mat-list-item>
+</mat-list>
+</mat-expansion-panel>

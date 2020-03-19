@@ -1,0 +1,31 @@
+<div *ngIf="displayedQuestion && displayedQuestion.question !== ''; else noQuestion">
+    <div style="padding-bottom: 1%;">
+      <label [innerHtml]="displayedQuestion.question"></label>
+    </div>
+    <mat-form-field style="width: 90%; padding-right: 3%" *ngIf="displayedQuestion.answers.length > 0">
+      <mat-select 
+        placeholder="Make a Selection"
+        [(ngModel)]="questionAnswers[displayedQuestion.question]">
+        <mat-option *ngFor="let option of displayedQuestion.answers" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field  style="width: 90%; padding-right: 3%" *ngIf="displayedQuestion.answers.length < 1">
+        <input 
+        matInput
+        placeholder="Describe"
+        [(ngModel)]="questionAnswers[displayedQuestion.question]">
+    </mat-form-field>
+    <button
+    mat-raised-button
+    color="primary"
+    [disabled]="!questionAnswers[displayedQuestion.question]"
+    (click)="onQuestionSubmit(displayedQuestion.nextQuestionId, questionAnswers[displayedQuestion.question])">Submit</button>
+</div>
+
+<ng-template #noQuestion>
+  <div style="text-align:center">
+    <mat-icon class="complete-check" color="primary">check_circle_outline</mat-icon>
+  </div>
+</ng-template>

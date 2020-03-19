@@ -1,0 +1,37 @@
+<mat-expansion-panel
+  class="pan__card__wrapper pan__ticket__wrapper"
+  style="margin: 1% 0 1% 0; padding: 0"
+  [expanded]="true">
+  <mat-expansion-panel-header class="pan__card__header">
+    <h3 class="pan__card__header__title">More Details</h3>
+  </mat-expansion-panel-header>
+  <mat-tab-group [(selectedIndex)]="selectedIndex">
+    <mat-tab label="Transactions">
+    </mat-tab>
+    <mat-tab label="History">
+    </mat-tab>
+    <mat-tab label="Process Data">
+    </mat-tab>
+    <mat-tab label="Attachments">
+    </mat-tab>
+    <mat-tab label="Keywords" [disabled]="true">
+    </mat-tab>
+  </mat-tab-group>
+  
+  <div *ngIf="selectedIndex === 0">
+    <pan-transaction-list
+      [showHeader]="false"
+      [transactions]="ticket.transactionList">
+    </pan-transaction-list>
+  </div>
+  <div *ngIf="selectedIndex === 1">
+    <pan-ticket-history [actions]="ticket.actionList"></pan-ticket-history>    
+  </div>
+  <div *ngIf="selectedIndex === 2">
+    <pan-process-data [actions]="ticket.actionList"></pan-process-data>    
+  </div>
+  <div *ngIf="selectedIndex === 3">
+    <pan-attachments [attachments]="ticket.attachmentList"></pan-attachments>    
+  </div>
+
+</mat-expansion-panel>

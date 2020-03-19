@@ -1,0 +1,10 @@
+@import '../../shared/styles/shared.scss';
+.search {
+    &__row {
+        cursor: pointer;  
+      }
+      
+    &__row:hover {
+        background: #f5f5f5;
+    }
+}

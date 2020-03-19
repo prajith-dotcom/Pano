@@ -1,0 +1,15 @@
+[
+    {
+        "product_type": "Double Miles",
+        "rule_applied": "Credit Card",
+        "interest": "1.98",
+        "amount":"10000"
+    },
+    {
+      "product_type": "No Interest - 15 Months",
+      "rule_applied": "Balance Transfer",
+      "interest": "0",
+      "amount":"15000"
+    }
+    
+]

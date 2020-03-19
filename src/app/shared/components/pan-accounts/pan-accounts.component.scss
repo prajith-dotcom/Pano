@@ -1,0 +1,9 @@
+@import '../../styles/shared.scss';
+
+.mat-expansion-panel-body {
+    padding: 0 0 1% 0 !important;
+}
+
+::ng-deep .pan__accounts__wrapper .mat-expansion-panel-body {
+    padding: 0 0 1% 0 !important;
+}

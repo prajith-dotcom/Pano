@@ -1,0 +1,34 @@
+<mat-toolbar class="toolbar__wrapper" style="display: flex" color="primary">
+  <div style="flex: 37%">
+    <h1 class="toolbar__logo">
+      <a (click)="onHomeClick()">{{user.type.description === 'ADMIN' ? 'PANORAMA' : 'PANORAMA ONLINE BANKING'}}</a>
+    </h1>
+  </div>
+  <div style="flex: 40%">
+    <div *ngIf="user.type.description === 'ADMIN'">
+      <input #searchBox [(ngModel)]="searchEntry" type="text" class="toolbar__search-box" placeholder="Search Customers" [formControl]="searchControl"
+        [matAutocomplete]="auto" (click)="onSearchClick()" (keyup.enter)="searchEntry.includes(':') ? getCustomer() : tooltip.show()"
+        [matTooltipDisabled]="true" matTooltip="This is the tooltip message" #tooltip="matTooltip">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option style="font-size: 11pt" *ngFor="let option of filteredOptions" (click)="getCustomer()" [value]="option.type + ': ' + getDisplayValue(option.type, searchEntry)">
+          <b>{{ option.type }}</b>: {{ getDisplayValue(option.type, searchEntry) }}
+        </mat-option>
+      </mat-autocomplete>
+      <div *ngIf="state === 'searching'">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+    </div>
+  </div>
+  <div style="flex: 40%; text-align:right">
+    <button style="font-size: 14pt!important" mat-button [matMenuTriggerFor]="menu">{{user.username}}</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngIf="user.type.description === 'ADMIN'" (click)="addUser()">
+        Add New User
+      </button>
+      <button mat-menu-item *ngIf="user.type.description === 'ADMIN'" (click)="goToAdvanced()">
+        KPI
+      </button>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

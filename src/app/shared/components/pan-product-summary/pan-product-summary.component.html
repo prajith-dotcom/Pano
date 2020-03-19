@@ -1,0 +1,30 @@
+<mat-expansion-panel
+  class="pan__card__wrapper mat-elevation-z0" 
+  [expanded]="panelState ==='open'"
+  (expandedChange)="panelChange($event)">
+<mat-expansion-panel-header class="pan__card__header">
+  <mat-panel-title class="pan__card__header__title">
+    <h3>Product Summary</h3>
+  </mat-panel-title>
+</mat-expansion-panel-header>
+<mat-card *ngFor="let account of accounts" class="product-card">
+  <mat-card-header>
+    <mat-card-title>
+      {{account.label}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-grid-list cols="2" rowHeight="30px">
+      <mat-grid-tile class="rate-text">
+        <mat-icon *ngIf="account.type === 'Checking'; else saving">payment</mat-icon>
+        <ng-template #saving>
+          <mat-icon>account_balance</mat-icon>
+        </ng-template>
+      </mat-grid-tile>
+      <mat-grid-tile class="rate-text">
+        ${{nFormatter(account.balance.amount)}}
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>
+</mat-expansion-panel>

@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/theming';
+@import './app/shared/styles/variables.scss';
+
+// always include only once per project
+@include mat-core();
+
+$pan-primary: mat-palette($mat-blue-grey, 700, 300, 900);
+$pan-accent: mat-palette($mat-blue-grey);
+$pan-warn: mat-palette($mat-deep-orange, A400);
+
+$pan-primary-green: mat-palette($mat-light-green, 700, 300, 900);
+$pan-accent-green: mat-palette($mat-light-green);
+$pan-warn: mat-palette($mat-deep-orange, 600);
+
+$pan-theme: mat-light-theme(
+    $pan-primary-green,
+    $pan-accent-green,
+    $pan-warn
+);
+
+$pan-typography: mat-typography-config(
+  $font-family: $primary-font,
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+
+.pan {
+  // use our theme with angular-material-theme mixin
+  @include angular-material-theme($pan-theme);
+  @include angular-material-typography($pan-typography);
+  background-color: $primary-background;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: normal;
+  }
+}

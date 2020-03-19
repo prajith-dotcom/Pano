@@ -1,0 +1,32 @@
+<mat-expansion-panel 
+  *ngIf="customer"
+  class="pan__card__wrapper mat-elevation-z0" 
+  [expanded]="panelState ==='open'"
+  (expandedChange)="panelChange($event)">
+  <mat-expansion-panel-header
+    class="pan__card__header"
+    [ngClass]="{ 'pan__card__header--collapsed': panelState !== 'open' }">
+    <mat-panel-title class="pan__card__header__title">
+      <h1>{{ customer.legal_name }}</h1>&nbsp;&nbsp;
+    </mat-panel-title>
+    <mat-panel-description>
+      <p class="pan__card__description" *ngIf="user.type.description === 'ADMIN'">
+        Customer Number: {{ customer.customer_number }}
+      </p>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div *ngIf="loadState === 'loading'">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <div style="display: flex; padding-top: 0.7%;" class="row">
+    <div style="flex: 20%; text-align: left; padding-top: 1%; color: gray;">
+      Last Login: 6/10/2018 06:20 PM
+    </div>
+    <div style="flex: 50%; text-align: right; padding: 0.7% 0  0.7% 0">
+      <button mat-raised-button color="primary" (click)="toggleEdit()">
+        {{ state === 'static' ? 'Edit' : 'Save' }}
+      </button>
+    </div>
+  </div>
+  <pan-details [rows]="rows" [(model)]="customer" [(state)]="state"></pan-details>
+</mat-expansion-panel>

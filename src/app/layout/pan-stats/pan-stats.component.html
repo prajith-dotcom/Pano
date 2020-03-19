@@ -1,0 +1,144 @@
+<div class="pan__wrapper">
+  <mat-button-toggle-group
+    class="toggle-group"
+    #group="matButtonToggleGroup"
+    (change)="toggleChanged(group.value)"
+    [value]="selectedToggleValue">
+    <mat-button-toggle 
+      *ngFor="let val of timePeriods"
+      [value]="val">
+      {{val}}
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+  <div class="row">
+    <mat-card 
+      class="pan__card__wrapper"
+      style="flex: 1; margin-right: 1%">
+      <mat-card-header class="pan__card__header">
+        <h3 class="pan__card__header__title">
+          Deposit Account Opening    
+        </h3>
+      </mat-card-header>
+      <div class="button-row">
+        <div class="column">
+          <mat-button-toggle-group
+            #chartGroup="matButtonToggleGroup"
+            [value]="chartType"
+            (change)="chartType = chartGroup.value" >
+            <mat-button-toggle [value]="'line'">
+              Line
+            </mat-button-toggle>
+            <mat-button-toggle [value]="'bar'">
+              Bar
+            </mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+        <div class="column" style="text-align: right">
+          <mat-select placeholder="Time Period" [(ngModel)]="yearSelected">
+            <mat-option *ngFor="let year of years" [value]="year">
+              {{year}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+     
+      <canvas baseChart
+        [options]="chartOptions"
+        [datasets]="barChartData"
+        [labels]="lineChartLabels"
+        [chartType]="chartType">
+      </canvas>
+    </mat-card>
+    <mat-card 
+      class="pan__card__wrapper"
+      style="flex: 1">
+      <mat-card-header class="pan__card__header">
+        <h3 class="pan__card__header__title">
+          Customer Registration   
+        </h3>
+      </mat-card-header>
+      <div class="button-row">
+        <div class="column">
+          <mat-button-toggle-group
+            #customerChartGroup="matButtonToggleGroup"
+            [value]="customerChartType"
+            (change)="customerChartType = customerChartGroup.value" >
+            <mat-button-toggle [value]="'line'">
+              Line
+            </mat-button-toggle>
+            <mat-button-toggle [value]="'bar'">
+              Bar
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div class="column" style="text-align: right">
+          <mat-select  placeholder="Time Period" [(ngModel)]="yearSelected">
+            <mat-option *ngFor="let year of years" [value]="year">
+              {{year}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+      
+      <canvas baseChart
+        [options]="chartOptions"
+        [datasets]="customerBarChartData"
+        [labels]="lineChartLabels"
+        [chartType]="customerChartType">
+      </canvas>
+    </mat-card>
+  </div>
+  <div class="row">
+    <mat-card 
+      class="pan__card__wrapper"
+      style="flex: 1; margin-right: 1%">
+      <mat-card-header class="pan__card__header">
+        <h3 class="pan__card__header__title">
+          Account Activity  
+        </h3>
+      </mat-card-header>
+      <div style="flex: 1">
+        <canvas baseChart
+          [options]="chartOptions"
+          [data]="accountActivityData"
+          [legend]="true"
+          [labels]="accountActivityLabels"
+          [chartType]="'doughnut'">
+        </canvas>
+      </div>
+    </mat-card>
+    <mat-card 
+      class="pan__card__wrapper"
+      style="flex: 1; margin-right: 1%">
+      <mat-card-header class="pan__card__header">
+        <h3 class="pan__card__header__title">
+          Account Cross Sale    
+        </h3>
+      </mat-card-header>
+      <div style="flex: 1">
+        <canvas baseChart
+          [options]="chartOptions"
+          [data]="crossSaleChartData"
+          [legend]="true"
+          [labels]="crossSaleChartLabels"
+          [chartType]="'doughnut'">
+        </canvas>
+      </div>
+    </mat-card>
+    <mat-card 
+      class="pan__card__wrapper"
+      style="flex: 1">
+      <mat-card-header class="pan__card__header">
+        <h3 class="pan__card__header__title">
+          Account Closing   
+        </h3>
+      </mat-card-header>
+      <canvas baseChart
+        [options]="chartOptions"
+        [datasets]="acctClosingChartData"
+        [labels]="lineChartLabels"
+        [chartType]="'horizontalBar'">
+      </canvas>
+    </mat-card>
+  </div>
+</div>

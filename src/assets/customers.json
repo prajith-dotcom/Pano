@@ -1,0 +1,118 @@
+[{
+        "user_id": "5e190b125a00f3fffd4b9eea",
+        "customer_number": 776711,
+        "legal_name": "Bean Chapman",
+        "mobile_phone_number": "+1 (880) 551-2560",
+        "email": "beanchapman@eyewax.com",
+        "date_of_birth": "Sun Oct 07 2018 19:47:14 GMT-0500 (Central Daylight Time)",
+        "relationship_status": "divorced",
+        "credit_rating": "high",
+        "credit_limit": "$1,681",
+        "highest_education_attained": "high school",
+        "employment_status": "student",
+        "kyc_status": "blue",
+        "last_ok_date": "Sun Oct 07 2018 19:47:14 GMT-0500 (Central Daylight Time)",
+        "accounts": [
+                {
+                  "id": 3416590,
+                  "customerNumber": 776711,
+                  "name": "Kaufman Baird",
+                  "type": "Checking",
+                  "status": "Closed",
+                  "label": "Primary",
+                  "bank_id": {},
+                  "balance": {
+                    "currency": "GBP",
+                    "amount": "2938"
+                  },
+                  "account_routings": {},
+                  "account_rules": {},
+                  "owners": {},
+                  "IBAN": {},
+                  "swift_bic": {},
+                  "transactions": {}
+                },
+                {
+                  "id": 1308074,
+                  "customerNumber": 360465,
+                  "name": "Bonner Mccoy",
+                  "type": "Savings",
+                  "status": "Active",
+                  "label": "Primary",
+                  "bank_id": {},
+                  "balance": {
+                    "currency": "GBP",
+                    "amount": "1054"
+                  },
+                  "account_routings": {},
+                  "account_rules": {},
+                  "owners": {},
+                  "IBAN": {},
+                  "swift_bic": {},
+                  "transactions": {}
+                },
+                {
+                  "id": 1938456,
+                  "customerNumber": 559029,
+                  "name": "Whitley Rojas",
+                  "type": "Savings",
+                  "status": "Closed",
+                  "label": "Primary",
+                  "bank_id": {},
+                  "balance": {
+                    "currency": "$",
+                    "amount": "1004"
+                  },
+                  "account_routings": {},
+                  "account_rules": {},
+                  "owners": {},
+                  "IBAN": {},
+                  "swift_bic": {},
+                  "transactions": {}
+                },
+                {
+                  "id": 1871205,
+                  "customerNumber": 220795,
+                  "name": "Gallagher Malone",
+                  "type": "Savings",
+                  "status": "Active",
+                  "label": "Primary",
+                  "bank_id": {},
+                  "balance": {
+                    "currency": "GBP",
+                    "amount": "2119"
+                  },
+                  "account_routings": {},
+                  "account_rules": {},
+                  "owners": {},
+                  "IBAN": {},
+                  "swift_bic": {},
+                  "transactions": {}
+                },
+                {
+                  "id": 3230064,
+                  "customerNumber": 367085,
+                  "name": "Norton Francis",
+                  "type": "Checking",
+                  "status": "Active",
+                  "label": "Primary",
+                  "bank_id": {},
+                  "balance": {
+                    "currency": "$",
+                    "amount": "1289"
+                  },
+                  "account_routings": {},
+                  "account_rules": {},
+                  "owners": {},
+                  "IBAN": {},
+                  "swift_bic": {},
+                  "transactions": {}
+                }
+              ],
+        "tickets": {},
+        "address": { "address1" : "673", "address2":"Syracuse Ave", "city": "New York", "state" : "NY","country" : "USA","postalCode":"65465"},
+        "identification": { "ssn" : "123-546-9876"}
+}]
+
+
+

@@ -1,0 +1,28 @@
+<mat-card class="login-wrapper">
+  <div class="login-logo">PANORAMA</div>
+  <mat-card-content>
+    <pan-slide-panel [activePane]="activePane">
+      <div leftPane>
+        <form [formGroup]="login">
+          <mat-form-field class="login-field">
+            <input matInput formControlName="username" placeholder="Username">
+          </mat-form-field>
+          <mat-form-field class="login-field">
+            <input matInput formControlName="password" type="password" placeholder="Password">
+          </mat-form-field>
+          <div class="button-wrapper">
+            <button mat-raised-button color="primary" (click)="submit()" [disabled]="login.invalid">Login</button>
+          </div>
+          <div class="button-wrapper">
+            <button mat-button color="secondary" (click)="activePane = 'right'">Register</button>
+          </div>
+        </form>
+      </div>
+
+      <div rightPane>
+        <pan-register *ngIf="activePane === 'right'" (switch)="switch($event)"></pan-register>
+      </div>
+    </pan-slide-panel>
+
+  </mat-card-content>
+</mat-card>

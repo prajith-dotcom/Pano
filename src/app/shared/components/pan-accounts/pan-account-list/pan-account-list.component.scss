@@ -1,0 +1,27 @@
+@import '../../../styles/shared.scss';
+
+
+.row {
+  position: relative;
+  cursor: pointer;  
+}
+
+.row:hover {
+  background: #f5f5f5;
+}
+
+.product-column {
+  flex: 0 0 200px;
+}
+.mat-cell {
+  font-size: 11pt !important;
+}
+
+.detail-row {
+  overflow: hidden;
+  background-color: #f5f5f5 !important;
+}
+
+.mat-expansion-panel-body {
+  padding: 0 0 1% 0 !important;
+}

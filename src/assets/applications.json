@@ -1,0 +1,218 @@
+[
+    {
+      "applicationNumber": 1041502,
+      "customerNumber": 248689,
+      "identity": {
+        "accountType": "Checking",
+        "accountName": "Primary",
+        "firstName": "Jeannine",
+        "middleInitial": "M",
+        "lastName": "Molina",
+        "suffix": "Mr",
+        "dateOfBirth": "Sun Aug 05 2018 15:32:42 GMT-0500 (Central Daylight Time)",
+        "ssn": 342083336,
+        "citizenFlag": "Y",
+        "idType": "Passport",
+        "idNumber": 886161,
+        "issuedLocation": "Wheaton",
+        "issuedDate": "Tue May 21 1974 22:24:50 GMT-0500 (Central Daylight Time)",
+        "expDate": "Thu Sep 18 1986 18:42:54 GMT-0500 (Central Daylight Time)"
+      },
+      "contactInfo": {
+        "address1": 260,
+        "address2": "Neptune Avenue",
+        "city": "Bawcomville",
+        "state": "Connecticut",
+        "postalCode": 6854,
+        "email": "jeanninemolina@comvoy.com",
+        "phoneNumber": "+1 (807) 558-2202"
+      },
+      "fund": {
+        "acctActivity": "Debit Card and Electronic Transfers within the US",
+        "occupation": "Business",
+        "sourceOfIncome": "Inheritance",
+        "account": 3081760,
+        "amount": "$144"
+      }
+    },
+    {
+      "applicationNumber": 3101187,
+      "customerNumber": 435791,
+      "identity": {
+        "accountType": "Savings",
+        "accountName": "Secondary",
+        "firstName": "Farrell",
+        "middleInitial": "M",
+        "lastName": "Gutierrez",
+        "suffix": "Mr",
+        "dateOfBirth": "Sun Sep 16 2012 23:08:55 GMT-0500 (Central Daylight Time)",
+        "ssn": 523854043,
+        "citizenFlag": "Y",
+        "idType": "Passport",
+        "idNumber": 758518,
+        "issuedLocation": "Torboy",
+        "issuedDate": "Wed Jun 10 1987 15:51:15 GMT-0500 (Central Daylight Time)",
+        "expDate": "Sat Jul 04 2015 13:46:20 GMT-0500 (Central Daylight Time)"
+      },
+      "contactInfo": {
+        "address1": 553,
+        "address2": "Bijou Avenue",
+        "city": "Richmond",
+        "state": "New York",
+        "postalCode": 1681,
+        "email": "farrellgutierrez@comvoy.com",
+        "phoneNumber": "+1 (821) 496-2435"
+      },
+      "fund": {
+        "acctActivity": "Debit Card and Electronic Transfers within the US",
+        "occupation": "Business",
+        "sourceOfIncome": "Employment Income",
+        "account": 1693293,
+        "amount": "$155"
+      }
+    },
+    {
+      "applicationNumber": 1849087,
+      "customerNumber": 334707,
+      "identity": {
+        "accountType": "Checking",
+        "accountName": "Secondary",
+        "firstName": "Kathleen",
+        "middleInitial": "J",
+        "lastName": "Becker",
+        "suffix": "Mr",
+        "dateOfBirth": "Tue Apr 13 1971 18:25:29 GMT-0600 (Central Standard Time)",
+        "ssn": 778546977,
+        "citizenFlag": "N",
+        "idType": "Passport",
+        "idNumber": 873906,
+        "issuedLocation": "Grimsley",
+        "issuedDate": "Fri Dec 24 1993 06:50:59 GMT-0600 (Central Standard Time)",
+        "expDate": "Mon Jan 01 1979 00:05:46 GMT-0600 (Central Standard Time)"
+      },
+      "contactInfo": {
+        "address1": 325,
+        "address2": "Stuart Street",
+        "city": "Wadsworth",
+        "state": "American Samoa",
+        "postalCode": 624,
+        "email": "kathleenbecker@comvoy.com",
+        "phoneNumber": "+1 (911) 549-3509"
+      },
+      "fund": {
+        "acctActivity": "Cash",
+        "occupation": "Business",
+        "sourceOfIncome": "Inheritance",
+        "account": 2653188,
+        "amount": "$241"
+      }
+    },
+    {
+      "applicationNumber": 3453402,
+      "customerNumber": 218079,
+      "identity": {
+        "accountType": "Checking",
+        "accountName": "Primary",
+        "firstName": "Woodard",
+        "middleInitial": "M",
+        "lastName": "Flores",
+        "suffix": "Mr",
+        "dateOfBirth": "Tue Feb 25 1997 15:16:41 GMT-0600 (Central Standard Time)",
+        "ssn": 780950266,
+        "citizenFlag": "N",
+        "idType": "Drivers License",
+        "idNumber": 438714,
+        "issuedLocation": "Riegelwood",
+        "issuedDate": "Thu Oct 06 1977 01:41:08 GMT-0500 (Central Daylight Time)",
+        "expDate": "Sun Apr 01 1984 13:49:16 GMT-0600 (Central Standard Time)"
+      },
+      "contactInfo": {
+        "address1": 550,
+        "address2": "Barwell Terrace",
+        "city": "Echo",
+        "state": "Minnesota",
+        "postalCode": 4102,
+        "email": "woodardflores@comvoy.com",
+        "phoneNumber": "+1 (918) 459-3161"
+      },
+      "fund": {
+        "acctActivity": "Debit Card and Electronic Transfers within the US",
+        "occupation": "Architecture",
+        "sourceOfIncome": "Inheritance",
+        "account": 3884468,
+        "amount": "$170"
+      }
+    },
+    {
+      "applicationNumber": 2700452,
+      "customerNumber": 156326,
+      "identity": {
+        "accountType": "Checking",
+        "accountName": "Primary",
+        "firstName": "Howard",
+        "middleInitial": "J",
+        "lastName": "Tucker",
+        "suffix": "Jr",
+        "dateOfBirth": "Fri Jul 29 1988 22:20:57 GMT-0500 (Central Daylight Time)",
+        "ssn": 875309201,
+        "citizenFlag": "Y",
+        "idType": "Drivers License",
+        "idNumber": 743826,
+        "issuedLocation": "Independence",
+        "issuedDate": "Sat Jun 14 1986 22:44:58 GMT-0500 (Central Daylight Time)",
+        "expDate": "Tue Sep 01 2015 07:48:13 GMT-0500 (Central Daylight Time)"
+      },
+      "contactInfo": {
+        "address1": 132,
+        "address2": "Stryker Court",
+        "city": "Alleghenyville",
+        "state": "North Carolina",
+        "postalCode": 4614,
+        "email": "howardtucker@comvoy.com",
+        "phoneNumber": "+1 (912) 592-3335"
+      },
+      "fund": {
+        "acctActivity": "Debit Card and Electronic Transfers within the US",
+        "occupation": "Business",
+        "sourceOfIncome": "Employment Income",
+        "account": 2131009,
+        "amount": "$372"
+      }
+    },
+    {
+      "applicationNumber": 3994836,
+      "customerNumber": 130448,
+      "identity": {
+        "accountType": "Checking",
+        "accountName": "Secondary",
+        "firstName": "Elizabeth",
+        "middleInitial": "M",
+        "lastName": "Ward",
+        "suffix": "Jr",
+        "dateOfBirth": "Fri Mar 26 2004 22:44:57 GMT-0600 (Central Standard Time)",
+        "ssn": 287502156,
+        "citizenFlag": "Y",
+        "idType": "Passport",
+        "idNumber": 531686,
+        "issuedLocation": "Baker",
+        "issuedDate": "Mon Jul 02 2001 18:51:39 GMT-0500 (Central Daylight Time)",
+        "expDate": "Mon Feb 08 2016 19:38:29 GMT-0600 (Central Standard Time)"
+      },
+      "contactInfo": {
+        "address1": 575,
+        "address2": "Victor Road",
+        "city": "Whitestone",
+        "state": "Palau",
+        "postalCode": 6807,
+        "email": "elizabethward@comvoy.com",
+        "phoneNumber": "+1 (888) 523-2644"
+      },
+      "fund": {
+        "acctActivity": "Cash",
+        "occupation": "Agriculture",
+        "sourceOfIncome": "Inheritance",
+        "account": 2060039,
+        "amount": "$319"
+      }
+    }
+  ]

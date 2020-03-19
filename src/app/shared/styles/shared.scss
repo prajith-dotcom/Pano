@@ -1,0 +1,70 @@
+@import './variables.scss';
+
+.pan {
+  &__wrapper {
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 6%;
+  }
+  &__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  &__card {
+    &__wrapper {
+      margin-top: 15px;
+      // border-radius: 5px;
+
+      &--top {
+        margin-top: 85px;
+        // border-radius: 5px;
+      }
+    }
+
+    &__header {
+      background-color: #fff !important;
+      color: #fff !important;
+      border-bottom: 1px solid lightgray;
+      // border-radius: 5px 5px 0 0;
+
+      &--collapsed {
+        border-radius: 5px;
+      }
+  
+      &__title {
+        color: #000 !important;
+        letter-spacing: 1pt;
+      }
+    }
+
+    &__description {
+      padding-top: 0.8%;
+      color: gray;
+      font-size: 16pt;
+    }
+
+    &__table {
+      &__wrapper {
+
+      }
+    }
+  }
+}
+
+::ng-deep .pan__card__header > .mat-expansion-indicator:after {
+  color: #000;
+}
+
+.mat-cell, .mat-header-cell {
+  font-size: 11pt !important;
+}
+
+// mat-row:nth-child(odd){
+//   background-color:#f3f3f3;
+// }
+
+mat-icon{
+  font-family: 'Material Icons' !important;
+}

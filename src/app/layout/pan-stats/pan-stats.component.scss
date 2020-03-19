@@ -1,0 +1,28 @@
+@import '../../shared/styles/shared.scss';
+
+.toggle-group {
+  margin-left: 43%;
+  margin-right: 37%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.button-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.button-row {
+  margin: 3%;
+}

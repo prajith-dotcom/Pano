@@ -1,0 +1,14 @@
+<form [formGroup]="userForm">
+    <mat-form-field class="register-field">
+      <input matInput formControlName="username" placeholder="Username">
+    </mat-form-field>
+    <mat-form-field class="register-field">
+      <input matInput formControlName="password" type="password" placeholder="Password">
+    </mat-form-field>
+    <div class="button-wrapper">
+      <button mat-button color="secondary" (click)="login()">Login</button>
+    </div>
+  </form>
+<div class="button-wrapper">
+  <button mat-raised-button color="primary" (click)="register()" [disabled]="userForm.invalid">Register</button>
+</div>

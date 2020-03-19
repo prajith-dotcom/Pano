@@ -1,0 +1,29 @@
+<mat-expansion-panel class="pan__card__wrapper pan__accounts__wrapper mat-elevation-z0" [expanded]="panelState ==='open'" (expandedChange)="panelChange($event)">
+  <mat-expansion-panel-header class="pan__card__header">
+    <mat-panel-title class="pan__card__header__title">
+      <h2>Offers</h2>
+    </mat-panel-title>
+    <mat-panel-description>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-card *ngFor="let offer of offers" class="offer-card">
+    <mat-card-header>
+      <mat-card-title class="offer-card-title">
+        {{offer.product_type}}
+      </mat-card-title>
+      <mat-card-subtitle class="offer-card-title">
+        {{offer.rule_applied}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-grid-list cols="2" rowHeight="30px">
+        <mat-grid-tile class="rate-text">
+          {{offer.interest}}%
+        </mat-grid-tile>
+        <mat-grid-tile class="rate-text">
+          {{nFormatter(offer.amount)}}
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+</mat-expansion-panel>

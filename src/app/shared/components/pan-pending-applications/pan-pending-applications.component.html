@@ -1,0 +1,62 @@
+<mat-expansion-panel class="pan__card__wrapper pan__accounts__wrapper mat-elevation-z0" [expanded]="panelState ==='open'" (expandedChange)="panelChange($event)">
+  <mat-expansion-panel-header class="pan__card__header">
+    <mat-panel-title class="pan__card__header__title">
+      <h2>Pending Items</h2>
+    </mat-panel-title>
+    <mat-panel-description>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-tab-group [(selectedIndex)]="selectedIndex">
+    <mat-tab label="Applications">
+    </mat-tab>
+    <mat-tab label="Disputes">
+    </mat-tab>
+    <mat-tab label="Transfers" [disabled]="true">
+    </mat-tab>
+  </mat-tab-group>
+
+  <mat-table *ngIf="selectedIndex === 0" #table [dataSource]="applicationDataSource" class="wrapper">
+    <!-- App ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+      <mat-cell *matCellDef="let application"> {{application.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+      <mat-cell *matCellDef="let application"> {{application.type}} </mat-cell>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
+      <mat-cell *matCellDef="let application"> {{application.status}} </mat-cell>
+    </ng-container>
+
+    <!-- Row Elements -->
+    <mat-header-row *matHeaderRowDef="displayedApplicationColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedApplicationColumns;" class="row">
+    </mat-row>
+  </mat-table>
+
+  <mat-table *ngIf="selectedIndex === 1" #table [dataSource]="ticketDataSource" class="wrapper">
+    <!-- Dispute ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+      <mat-cell *matCellDef="let application"> {{application.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
+      <mat-cell *matCellDef="let application"> {{application.status}} </mat-cell>
+    </ng-container>
+
+    <!-- Row Elements -->
+    <mat-header-row *matHeaderRowDef="displayedTicketColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedTicketColumns;" class="row">
+    </mat-row>
+  </mat-table>
+
+</mat-expansion-panel>

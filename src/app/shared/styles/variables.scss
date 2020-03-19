@@ -1,0 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import '~@angular/material/theming';
+
+$primary-color: #2a374c;
+$primary-font: "Roboto, sans-serif";
+$primary-background: #f0f0f0;
+$pan-primary: mat-palette($mat-blue-grey, 700, 300, 900);
+$pan-accent: mat-palette($mat-blue-grey);
+$pan-warn: mat-palette($mat-deep-orange, A200);

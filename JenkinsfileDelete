@@ -1,0 +1,50 @@
+#!groovy
+import hudson.model.*
+
+
+try {
+	def branch = '';
+	def source = '';
+    node {
+        stage('delete-branch') {
+			sh "oc project panorama"
+			sh 'echo "$payload" > tempGitFile.json'
+            // From the temp file place into variable
+            def fromgithook = readJSON file: 'tempGitFile.json'
+            // find branch name and set to lower case for environment variables
+            branch = fromgithook.ref
+			
+            def isDeleted = fromgithook.deleted
+            println isDeleted
+            def branchFull = branch
+            def lowercaseBranch = branch.toLowerCase();
+            branch = branch.substring(branch.lastIndexOf("/") + 1)
+            branch = branch.toLowerCase()
+
+			//if the branch is a feature, capture the branch name of the feature for shorter names
+			if (branch.contains('/')){
+				branch = branch.substring(branch.lastIndexOf("/") + 1)
+			}
+
+            // find any existing resources for this branch
+            sh """oc get dc -l app='panorama-ui-$branch' &> tempGetDC"""
+            def existingDeploymentConfig = readFile('tempGetDC').trim()
+
+            if(existingDeploymentConfig == "No resources found.") {
+                sh """echo 'no resources found for $branch'"""
+            } else {
+                sh """oc delete imagestream panorama-ui-$branch"""
+                sh """oc delete route panorama-ui-$branch"""
+                sh """oc delete service panorama-ui-$branch"""
+                sh """oc delete buildconfig panorama-ui-$branch"""
+                sh """oc delete deploymentconfig panorama-ui-$branch"""
+            }
+
+        } 
+    }
+} catch (err) {
+    echo "in catch block"
+    echo "Caught: ${err}"
+    currentBuild.result = 'FAILURE'
+    throw err
+}

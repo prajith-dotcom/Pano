@@ -1,0 +1,23 @@
+@import '../../styles/shared.scss';
+
+.text-field {
+  // width: 60%;
+  // padding: 1%;
+  // border: 1px solid lightgray;
+  // border-radius: 5px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.mat-expansion-panel-content {
+  font-size: 10pt !important;
+}
+
+.pan-snackbar {
+  background-color: #fff!important;
+  color: black!important;
+}

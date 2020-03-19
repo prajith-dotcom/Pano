@@ -1,0 +1,107 @@
+[
+    {
+      "id": "5e1b8b13bc9f0b4c54167c7f",
+      "number": 3416590,
+      "customerNumber": 776711,
+      "name": "Kaufman Baird",
+      "accountType": "Checking",
+      "status": "Closed",
+      "label": {},
+      "bank_id": {},
+      "balance": {
+        "currency": "GBP",
+        "amount": "$2,938"
+      },
+      "account_routings": {},
+      "account_rules": {},
+      "owners": {},
+      "type": {},
+      "IBAN": {},
+      "swift_bic": {},
+      "transactions": {}
+    },
+    {
+      "id": "5e1b8b13df9d7cc3737aadfd",
+      "number": 1308074,
+      "customerNumber": 360465,
+      "name": "Bonner Mccoy",
+      "accountType": "Savings",
+      "status": "Closed",
+      "label": {},
+      "bank_id": {},
+      "balance": {
+        "currency": "GBP",
+        "amount": "$1,054"
+      },
+      "account_routings": {},
+      "account_rules": {},
+      "owners": {},
+      "type": {},
+      "IBAN": {},
+      "swift_bic": {},
+      "transactions": {}
+    },
+    {
+      "id": "5e1b8b13057b282a8625b000",
+      "number": 1938456,
+      "customerNumber": 559029,
+      "name": "Whitley Rojas",
+      "accountType": "Savings",
+      "status": "Closed",
+      "label": {},
+      "bank_id": {},
+      "balance": {
+        "currency": "$",
+        "amount": "$1,004"
+      },
+      "account_routings": {},
+      "account_rules": {},
+      "owners": {},
+      "type": {},
+      "IBAN": {},
+      "swift_bic": {},
+      "transactions": {}
+    },
+    {
+      "id": "5e1b8b13bb0e646b8f6a7895",
+      "number": 1871205,
+      "customerNumber": 220795,
+      "name": "Gallagher Malone",
+      "accountType": "Savings",
+      "status": "Active",
+      "label": {},
+      "bank_id": {},
+      "balance": {
+        "currency": "GBP",
+        "amount": "$2,119"
+      },
+      "account_routings": {},
+      "account_rules": {},
+      "owners": {},
+      "type": {},
+      "IBAN": {},
+      "swift_bic": {},
+      "transactions": {}
+    },
+    {
+      "id": "5e1b8b13dde9da68748dacb8",
+      "number": 3230064,
+      "customerNumber": 367085,
+      "name": "Norton Francis",
+      "accountType": "Checking",
+      "status": "Active",
+      "label": {},
+      "bank_id": {},
+      "balance": {
+        "currency": "$",
+        "amount": "$1,289"
+      },
+      "account_routings": {},
+      "account_rules": {},
+      "owners": {},
+      "type": {},
+      "IBAN": {},
+      "swift_bic": {},
+      "transactions": {}
+    }
+  ]

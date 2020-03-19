@@ -1,0 +1,90 @@
+<mat-expansion-panel class="pan__card__wrapper" style="margin: 2% 0 2% 0; padding: 0" [expanded]="true">
+  <mat-expansion-panel-header class="pan__card__header">
+    <h3 class="pan__card__header__title">Tasks</h3>
+  </mat-expansion-panel-header>
+  <mat-table #table [dataSource]="dataSource" *ngIf="dataSource.filteredData.length > 0 ; else noTasks">
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let task">
+        <mat-chip color="primary" [selected]="task.status.description !== 'Open'" disabled="true">
+          {{setToNAIfUndefined(task.status.description)}}
+        </mat-chip>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Task Nr. Column -->
+    <ng-container matColumnDef="taskNumber">
+      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{task.taskNumber}} </mat-cell>
+    </ng-container>
+
+    <!-- Assigned Column -->
+    <ng-container matColumnDef="assigned">
+      <mat-header-cell *matHeaderCellDef> Assigned </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{setToNAIfUndefined(task.assignTo.user.description)}} </mat-cell>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Task Type </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{setToNAIfUndefined(task.customData)}} </mat-cell>
+    </ng-container>
+
+    <!-- Created Date Column -->
+    <ng-container matColumnDef="createdDate">
+      <mat-header-cell *matHeaderCellDef> Created Date </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{task.createdDate | date:'MM/dd/yyyy, h:mm:ss a'}} </mat-cell>
+    </ng-container>
+
+    <!-- Due Date Column -->
+    <ng-container matColumnDef="slaDate">
+      <mat-header-cell *matHeaderCellDef> Due Date </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{task.slaDate | date:'MM/dd/yyyy, h:mm:ss a'}} </mat-cell>
+    </ng-container>
+
+    <!-- Action Columns -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let task"> 
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="openActionDialog((task.status.description === 'Open' ? 'assign' : 'close'), task.taskNumber)"
+          [disabled]="task.status.description === 'Closed'">
+          {{task.status.description === 'Open' ? 'Assign' : 'Close'}}
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="assign">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let task"> 
+        <button
+          mat-raised-button
+          style="margin-top: 5%; margin-bottom: 5%;"
+          color="secondary"
+          (click)="claimTask(task)"
+          [disabled]="task.status.description === 'Closed' || task.assignTo.user.description === user.username">
+          Claim Task
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Row Elements -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="row">
+    </mat-row>
+  </mat-table>
+
+  <!-- Pagination -->
+  <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="false">
+  </mat-paginator>
+</mat-expansion-panel>
+
+<ng-template #noTasks>
+  <div style="text-align: center;">
+    <h4>No Tasks to Display</h4>
+  </div>
+</ng-template>

@@ -1,0 +1,297 @@
+{
+	"kind": "Template",
+	"apiVersion": "v1",
+	"metadata": {
+		"name": "panorama-ui",
+		"annotations": {
+			"openshift.io/display-name": "Panorama-UI",
+			"description": "The front end application of Panorama ${DESCRIPTION}"
+		}
+	},
+	"message": "The following service(s) have been created in your project.\n\nFor more information about using this template, including OpenShift considerations, see https://github.com/openshift/nodejs-ex/blob/master/README.md.",
+	"labels": {
+		"template": "panorama-ui",
+    "app": "${NAME}"
+	},
+	"objects": [{
+			"apiVersion": "v1",
+			"kind": "BuildConfig",
+			"metadata": {
+				"labels": {
+					"app": "${NAME}"
+				},
+				"name": "${NAME}",
+				"namespace": "${NAMESPACE}"
+			},
+			"spec": {
+				"nodeSelector": null,
+				"output": {
+					"to": {
+						"kind": "ImageStreamTag",
+						"name": "${NAME}:latest"
+					}
+				},
+				"resources": {},
+				"runPolicy": "Serial",
+				"source": {
+					"git": {
+						"ref": "${SOURCE_REPOSITORY_REF}",
+						"uri": "${SOURCE_REPOSITORY_URL}"
+					},
+					"sourceSecret": {
+						"name": "demo-crossvale"
+					},
+					"type": "Git"
+				},
+				"strategy": {
+					"sourceStrategy": {
+						"from": {
+							"kind": "ImageStreamTag",
+							"name": "nodejs:6",
+							"namespace": "openshift"
+						},
+						"env": [{
+							"name": "NPM_MIRROR",
+							"value": "${NPM_MIRROR}"
+						}]
+					},
+					"type": "Source"
+				},
+				"triggers": [{
+						"github": {
+							"secret": "${GITHUB_WEBHOOK_SECRET}"
+						},
+						"type": "GitHub"
+					},
+					{
+						"generic": {
+							"secret": "${GENERIC_WEBHOOK_SECRET}"
+						},
+						"type": "Generic"
+					},
+					{
+						"type": "ImageChange"
+					},
+					{
+						"type": "ConfigChange"
+					}
+				]
+			}
+		},
+		{
+			"apiVersion": "v1",
+			"kind": "ImageStream",
+			"metadata": {
+				"labels": {
+					"app": "${NAME}"
+				},
+				"name": "${NAME}",
+				"namespace": "${NAMESPACE}"
+			},
+			"spec": {
+				"lookupPolicy": {
+					"local": false
+				}
+			}
+		},
+		{
+			"apiVersion": "v1",
+			"kind": "Route",
+			"metadata": {
+				"labels": {
+					"app": "${NAME}"
+				},
+				"name": "${NAME}",
+				"namespace": "${NAMESPACE}"
+			},
+			"spec": {
+				"host": "${APPLICATION_DOMAIN}",
+				"port": {
+					"targetPort": "8080-tcp"
+				},
+				"to": {
+					"kind": "Service",
+					"name": "${NAME}",
+					"weight": 100
+				},
+				"wildcardPolicy": "None"
+			}
+		},
+		{
+			"apiVersion": "v1",
+			"kind": "Service",
+			"metadata": {
+				"labels": {
+					"app": "${NAME}"
+				},
+				"name": "${NAME}",
+				"namespace": "${NAMESPACE}"
+			},
+			"spec": {
+				"ports": [{
+					"name": "8080-tcp",
+					"port": 8080,
+					"protocol": "TCP",
+					"targetPort": 8080
+				}],
+				"selector": {
+					"deploymentconfig": "${NAME}"
+				},
+				"sessionAffinity": "None"
+			}
+		},
+		{
+			"apiVersion": "v1",
+			"kind": "DeploymentConfig",
+			"metadata": {
+				"labels": {
+					"app": "${NAME}"
+				},
+				"name": "${NAME}",
+				"namespace": "${NAMESPACE}"
+			},
+			"spec": {
+				"replicas": 1,
+				"selector": {
+					"deploymentconfig": "${NAME}"
+				},
+				"strategy": {
+					"activeDeadlineSeconds": 21600,
+					"resources": {},
+					"rollingParams": {
+						"intervalSeconds": 1,
+						"maxSurge": "25%",
+						"maxUnavailable": "25%",
+						"timeoutSeconds": 900,
+						"updatePeriodSeconds": 1
+					},
+					"type": "Rolling"
+				},
+				"template": {
+					"metadata": {
+						"creationTimestamp": null,
+						"labels": {
+							"app": "${NAME}",
+							"deploymentconfig": "${NAME}"
+						}
+					},
+					"spec": {
+						"containers": [{
+							"image": " ",
+							"imagePullPolicy": "Always",
+							"name": "${NAME}",
+							"ports": [{
+								"containerPort": 8080,
+								"protocol": "TCP"
+							}],
+							"resources": {
+								"limits": {
+									"memory": "2Gi"
+								}
+							},
+							"terminationMessagePath": "/dev/termination-log",
+							"terminationMessagePolicy": "File"
+						}],
+						"dnsPolicy": "ClusterFirst",
+						"restartPolicy": "Always",
+						"schedulerName": "default-scheduler",
+						"securityContext": {},
+						"terminationGracePeriodSeconds": 30
+					}
+				},
+				"test": false,
+				"triggers": [{
+						"imageChangeParams": {
+							"automatic": true,
+							"containerNames": [
+								"${NAME}"
+							],
+							"from": {
+								"kind": "ImageStreamTag",
+								"name": "${NAME}:latest",
+								"namespace": "${NAMESPACE}"
+							}
+						},
+						"type": "ImageChange"
+					},
+					{
+						"type": "ConfigChange"
+					}
+				]
+			}
+		}
+	],
+	"parameters": [{
+			"name": "NAME",
+			"displayName": "Name",
+			"description": "The name assigned to all of the frontend objects defined in this template.",
+			"required": true,
+			"value": "nodejs-example"
+		},
+		{
+			"name": "NAMESPACE",
+			"displayName": "Namespace",
+			"description": "The OpenShift Namespace where the ImageStream resides.",
+			"required": true,
+			"value": "openshift"
+		},
+		{
+			"name": "MEMORY_LIMIT",
+			"displayName": "Memory Limit",
+			"description": "Maximum amount of memory the container can use.",
+			"required": true,
+			"value": "512Mi"
+		},
+		{
+			"name": "SOURCE_REPOSITORY_URL",
+			"displayName": "Git Repository URL",
+			"description": "The URL of the repository with your application source code.",
+			"required": true,
+			"value": "https://github.com/crossvale-inc/panorama-ui.git"
+		},
+		{
+			"name": "SOURCE_REPOSITORY_REF",
+			"displayName": "Git Reference",
+			"description": "Set this to a branch name, tag or other ref of your repository if you are not using the default branch.",
+			"required": true,
+			"value": ""
+		},
+		{
+			"name": "CONTEXT_DIR",
+			"displayName": "Context Directory",
+			"description": "Set this to the relative path to your project if it is not in the root of your repository."
+		},
+		{
+			"name": "APPLICATION_DOMAIN",
+			"displayName": "Application Hostname",
+			"description": "The exposed hostname that will route to the Node.js service, if left blank a value will be defaulted.",
+			"value": ""
+		},
+		{
+			"name": "DESCRIPTION",
+			"displayName": "Application Description",
+			"description": "The Commit Description with the Branch name, if left blank a value will be defaulted.",
+			"value": ""
+		},
+		{
+			"name": "GITHUB_WEBHOOK_SECRET",
+			"displayName": "GitHub Webhook Secret",
+			"description": "Github trigger secret.  A difficult to guess string encoded as part of the webhook URL.  Not encrypted.",
+			"generate": "expression",
+			"from": "[a-zA-Z0-9]{40}"
+		},
+		{
+			"name": "GENERIC_WEBHOOK_SECRET",
+			"displayName": "Generic Webhook Secret",
+			"description": "A secret string used to configure the Generic webhook.",
+			"generate": "expression",
+			"from": "[a-zA-Z0-9]{40}"
+		},
+		{
+			"name": "NPM_MIRROR",
+			"displayName": "Custom NPM Mirror URL",
+			"description": "The custom NPM mirror URL",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Add New User</h1>
+<div mat-dialog-content>
+  <form [formGroup]="userForm">
+    <mat-form-field class="register-field">
+      <input matInput formControlName="username" placeholder="Username">
+    </mat-form-field>
+    <mat-form-field class="register-field">
+      <input matInput formControlName="password" type="password" placeholder="Password">
+    </mat-form-field>
+    <mat-form-field class="register-field">
+      <mat-select placeholder="User Type" formControlName="type">
+        <mat-option *ngFor="let type of types" [value]="type">
+          {{type.description}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="register-field">
+      <mat-select placeholder="User Group" formControlName="group">
+        <mat-option *ngFor="let group of groups" [value]="group">
+          {{group.groupName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="button-wrapper">
+      <button mat-raised-button color="primary" (click)="register()" [disabled]="userForm.invalid">
+        Add User
+      </button>
+    </div>
+  </form>
+</div>

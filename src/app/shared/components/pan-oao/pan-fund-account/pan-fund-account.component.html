@@ -1,0 +1,55 @@
+<div [formGroup]="form">
+  <h3>Account Activity</h3>
+  <mat-form-field style="width: 100%">
+    <mat-select placeholder="Expected Account Activity" formControlName="acctActivity" multiple>
+      <mat-option *ngFor="let activity of activities" [value]="activity">
+        {{ activity }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="width: 48%; padding-right: 4%;">
+    <mat-select placeholder="Occupation" formControlName="occupation">
+      <mat-option *ngFor="let occupation of occupations" [value]="occupation">
+        {{ occupation }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="width: 48%">
+    <mat-select placeholder="Primary Source of Income" formControlName="sourceOfIncome">
+      <mat-option *ngFor="let source of incomeSources" [value]="source">
+        {{ source }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- <h3>Fund Account</h3>  
+  <mat-form-field style="width: 100%">
+    <span matPrefix>$ &nbsp;</span>
+    <input type="number" matInput placeholder="Amount" formControlName="amount">
+  </mat-form-field>
+  <mat-form-field style="width: 100%;">
+    <mat-select placeholder="Account From" formControlName="account">
+      <mat-option *ngFor="let acct of accounts" [value]="acct.accountNumber">
+        {{ acct.accountType + ' - ' + acct.accountNumber }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+  <!-- <h3>
+    External
+  </h3>
+  <mat-form-field style="width: 100%">
+    <mat-select placeholder="Account Type" formControlName="accountType">
+      <mat-option value="shecking">
+        Checking
+      </mat-option>
+      <mat-option value="savings">
+        Savings
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="width: 48%; padding-right: 4%">
+    <input matInput placeholder="Account Number" formControlName="accountNumber">
+  </mat-form-field>
+  <mat-form-field style="width: 48%">
+    <input matInput placeholder="Routing Number" formControlName="routingNumber">
+  </mat-form-field> -->
+</div>

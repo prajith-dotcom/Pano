@@ -1,0 +1,70 @@
+<div id="accounts-table" *ngIf="dataSource && accounts && accounts.length > 0; else noAccounts">
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- Account Nr. Column -->
+    <ng-container matColumnDef="accountNumber">
+      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+      <mat-cell *matCellDef="let account"> {{account.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Account Name Column -->
+    <ng-container matColumnDef="accountName">
+      <mat-header-cell *matHeaderCellDef [ngClass]="'product-column'"> Name </mat-header-cell>
+      <mat-cell *matCellDef="let account" [ngClass]="'product-column'"> {{account.label}} </mat-cell>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="accountType">
+      <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+      <mat-cell *matCellDef="let account"> {{account.type}} </mat-cell>
+    </ng-container>
+
+
+    <!-- Avaliable Column -->
+    <ng-container matColumnDef="available">
+      <mat-header-cell *matHeaderCellDef> Available </mat-header-cell>
+      <mat-cell *matCellDef="let account"> {{account.balance.amount | currency}} </mat-cell>
+    </ng-container>
+
+    <!-- Posted Column -->
+    <ng-container matColumnDef="posted">
+      <mat-header-cell *matHeaderCellDef> Posted </mat-header-cell>
+      <mat-cell *matCellDef="let account"> {{account.balance.amount | currency}} </mat-cell>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let account"> {{account.status}} </mat-cell>
+    </ng-container>
+
+    <!-- Row Elements -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+      matRipple 
+      class="row"
+      [panDetailRow]="row" [panDetailRowTpl]="tpl"
+      (toggleChange)="onToggleChange($event)">
+    </mat-row>
+  </mat-table>
+
+  <!-- Pagination -->
+  <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="false">
+  </mat-paginator>
+</div>
+
+<!-- Detail Template -->
+<ng-template #tpl let-detail>
+  <div [@detailExpand] class="detail-row">
+    <pan-transactions
+      [customer]="customer"
+      [accountNumber]="selectedAccountNumber">
+    </pan-transactions>
+  </div>
+</ng-template>
+
+<ng-template #noAccounts>
+  <div style="text-align: center;">
+    <h4>No Accounts to Display</h4>
+  </div>
+</ng-template>

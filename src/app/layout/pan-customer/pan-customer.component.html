@@ -1,0 +1,50 @@
+<div class="pan__wrapper" *ngIf="customer && customer.legal_name !== null; else noResults">
+  <div style="width: 100%">
+    <mat-button-toggle-group #group="matButtonToggleGroup" value="enhanced">
+      <mat-button-toggle value="classic">
+        Banker
+      </mat-button-toggle>
+      <mat-button-toggle value="enhanced">
+        Customer
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <div *ngIf="group.value === 'classic'; else enhanced">
+    <div style="width: 75%; padding-right: 2%; float: left;">
+      <pan-inline-maintenance [customer]="customer"></pan-inline-maintenance>
+      <pan-accounts [customer]="customer" [accounts]="customer.accounts"></pan-accounts>
+    </div>
+    <div style="width: 23%; float: right;">
+      <pan-actions [customer]="customer" (applicationSubmitted)="appSubmitted($event)"></pan-actions>
+      <pan-pending-applications [customer]="customer" [submittedApp]="app"></pan-pending-applications>
+      <!-- <pan-offers [customerNumber]="customer.customer_number"></pan-offers> -->
+    </div>
+  </div>
+  <ng-template #enhanced>
+    <div class="row">
+      <div style="width: 20%; float: left; padding:10px;">
+        <pan-customer-profile [customer]="customer"></pan-customer-profile>
+        <!-- <pan-product-summary [customerNumber]="customer.customer_number"></pan-product-summary> -->
+        
+      </div>
+      <div style="width: 55%; float: left; padding:10px;">
+        <pan-balance></pan-balance>
+        <pan-accounts [customer]="customer" [accounts]="customer.accounts"></pan-accounts>
+
+        <!-- <pan-transactions [accountNumber]="customer.accounts[0].id" [customer]="customer"></pan-transactions> -->
+      </div>
+      <div style="width: 20%; float: right; padding:10px;">
+          <pan-actions [customer]="customer" (applicationSubmitted)="appSubmitted($event)"></pan-actions>
+        <pan-offers [customerNumber]="customer.customer_number"></pan-offers>
+      </div>
+    </div>
+  </ng-template>
+</div>
+<ng-template #noResults>
+  <div class="pan__wrapper">
+    <mat-card>
+      <h3>No Customer found</h3>
+    </mat-card>
+  </div>
+</ng-template>

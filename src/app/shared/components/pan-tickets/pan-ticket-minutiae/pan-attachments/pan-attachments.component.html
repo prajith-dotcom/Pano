@@ -1,0 +1,39 @@
+<div id="attachments-table">
+    <div *ngIf="dataSource">
+      <mat-table #table [dataSource]="dataSource" *ngIf="dataSource.filteredData.length > 0 ; else noActions">
+        <!-- Action Name Column -->
+        <ng-container matColumnDef="added">
+          <mat-header-cell *matHeaderCellDef> Added </mat-header-cell>
+          <mat-cell *matCellDef="let attachment"> {{attachment.audit.timeCreation | date:'MM/dd/yyyy, h:mm:ss a'}} </mat-cell>
+        </ng-container>
+  
+        <!-- Added By Column -->
+        <ng-container matColumnDef="addedBy">
+          <mat-header-cell *matHeaderCellDef> Added By </mat-header-cell>
+          <mat-cell *matCellDef="let attachment"> {{attachment.audit.userCreation}} </mat-cell>
+        </ng-container>
+  
+        <!-- File Name Column -->
+        <ng-container matColumnDef="fileName">
+          <mat-header-cell *matHeaderCellDef> File </mat-header-cell>
+          <mat-cell *matCellDef="let attachment"> {{attachment.fileName}} </mat-cell>
+        </ng-container>
+  
+        <!-- Row Elements -->
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="row">
+        </mat-row>
+      </mat-table>
+  
+      <!-- Pagination -->
+      <mat-paginator #paginator [pageSize]="20" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="false">
+      </mat-paginator>
+    </div>
+  </div>
+  
+  <ng-template #noActions>
+    <div style="text-align: center;">
+      <h4>No Attachments to Display</h4>
+    </div>
+  </ng-template>
+  

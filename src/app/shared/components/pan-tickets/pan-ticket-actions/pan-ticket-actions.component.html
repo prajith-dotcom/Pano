@@ -1,0 +1,18 @@
+<mat-expansion-panel class="pan__card__wrapper" style="margin: 1% 0 1% 0; padding: 0" [expanded]="true">
+  <mat-expansion-panel-header class="pan__card__header">
+    <h3 class="pan__card__header__title">Ticket Actions</h3>
+  </mat-expansion-panel-header>
+  <div style="flex: 100%; padding: 1%">
+    <form>
+      <mat-form-field class="full-width">
+        <input #actionInput matInput placeholder="Select an Action to Update this Ticket" aria-label="Action" [matAutocomplete]="auto"
+          [formControl]="actionCtrl">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="openActionDialog($event)" [displayWith]="displayFn">
+          <mat-option *ngFor="let action of filteredActions | async" [value]="action">
+            <span>{{ action.name }}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </div>
+</mat-expansion-panel>

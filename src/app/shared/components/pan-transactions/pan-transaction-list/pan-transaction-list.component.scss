@@ -1,0 +1,41 @@
+@import '../../../styles/shared.scss';
+
+.row {
+  position: relative;  
+}
+
+.description-column {
+  flex: 0 0 300px;
+}
+
+.mat-column-select {
+  overflow: visible;
+}
+
+.header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+  display: flex;
+  flex-direction: row;
+  // align-items: center;
+  justify-content: space-between;
+}
+
+.number-cell,
+.date-cell, {
+  width: 50%;
+  flex-grow: .8;
+}
+
+mat-form-field.small-txt {
+  font-size: 14px;
+  width: 15%;
+}
+
+.mat-column-narrative {
+  flex: 0 0 300px
+}
+
+.mat-column-postedDate {
+  flex: 0 0 200px
+}

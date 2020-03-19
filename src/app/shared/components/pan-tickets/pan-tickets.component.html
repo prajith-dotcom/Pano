@@ -1,0 +1,37 @@
+<mat-expansion-panel class="pan__card__wrapper pan__ticket__wrapper mat-elevation-z0" [expanded]="true">
+  <mat-expansion-panel-header class="pan__card__header">
+    <mat-panel-title class="pan__card__header__title">
+      <h2>{{ activePane === 'left' ? 'Tickets' : 'Ticket Deatils'}}
+      </h2>
+    </mat-panel-title>
+    <mat-panel-description *ngIf="activePane === 'right'">
+      <p class="pan__card__description">
+        Ticket Number: {{ selectedTicket.ticketNumber }}
+      </p>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <pan-slide-panel [activePane]="activePane">
+    <div leftPane>
+      <pan-tickets-list
+        [(selectedTicket)]="selectedTicket"
+        [(selectedTicketFilter)]="selectedTicketFilter">
+      </pan-tickets-list>
+    </div>
+
+    <div rightPane *ngIf="selectedTicket" style="margin: 2%">
+      <span class="back-arrow" (click)="activePane = 'left'; selectedTicket = undefined">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+          <path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z" />
+        </svg>
+        <span>
+          Back to List
+        </span>
+      </span>
+      <pan-ticket-details [ticket]="selectedTicket"></pan-ticket-details>
+      <pan-ticket-actions [ticket]="selectedTicket" (actionSubmitted)="updateTicket($event)"></pan-ticket-actions>
+      <pan-tasks-list [tasks]="selectedTicket.taskList" [ticket]="selectedTicket" (taskCompleted)="updateTicket($event)"></pan-tasks-list>
+      <pan-ticket-minutiae [ticket]="selectedTicket"></pan-ticket-minutiae>
+    </div>
+  </pan-slide-panel>
+
+</mat-expansion-panel>

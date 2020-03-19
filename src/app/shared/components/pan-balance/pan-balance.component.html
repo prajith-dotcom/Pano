@@ -1,0 +1,16 @@
+<mat-expansion-panel class="pan__card__wrapper pan__accounts__wrapper mat-elevation-z0" [expanded]="panelState ==='open'" (expandedChange)="panelChange($event)">
+  <mat-expansion-panel-header class="pan__card__header">
+    <mat-panel-title class="pan__card__header__title">
+      <h2>Balance</h2>
+    </mat-panel-title>
+    <mat-panel-description>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <canvas baseChart
+        height="100px"
+        [datasets]="chartConfig.dataset"
+        [labels]="chartConfig.labels"
+        [chartType]="chartConfig.chartType">
+</canvas>
+
+</mat-expansion-panel>

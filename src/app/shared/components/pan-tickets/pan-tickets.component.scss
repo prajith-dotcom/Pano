@@ -1,0 +1,8 @@
+@import '../../styles/shared.scss';
+
+::ng-deep .pan__ticket__wrapper .mat-expansion-panel-body {
+    padding: 0 0 1% 0 !important;
+}
+.back-arrow {
+    cursor: pointer;
+}

@@ -1,0 +1,21 @@
+@import '../../styles/shared.scss';
+@import '../../styles/variables.scss';
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 1%;
+}
+
+canvas {
+  margin: 5% 0 5% 0;
+}
+
+::ng-deep .mat-chip-list-wrapper {
+  justify-content: center;
+}
+
+.user-stats-chip {
+  font-size: 10pt;
+}

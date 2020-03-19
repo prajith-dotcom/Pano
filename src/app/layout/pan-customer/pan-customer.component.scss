@@ -1,0 +1,20 @@
+@import '../../shared/styles/shared.scss';
+
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.left, .right {
+  width: 18%;
+}
+
+.middle {
+  width: 60%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

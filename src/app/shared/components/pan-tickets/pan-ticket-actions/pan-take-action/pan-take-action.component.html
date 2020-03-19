@@ -1,0 +1,81 @@
+<h1 mat-dialog-title>Action - {{ actionType.name }}</h1>
+<div mat-dialog-content *ngIf="actionForm">
+  <form [formGroup]="actionForm">
+    <div *ngIf="actionType.task">
+      <mat-form-field class="form-field-full-width">
+        <input matInput formControlName="taskNumber" placeholder="Task Number">
+      </mat-form-field>
+    </div>
+    <div [ngSwitch]='actionType.formControl'>
+      <div *ngSwitchCase="'taskNumber'">
+        <mat-form-field class="form-field-full-width">
+          <input matInput formControlName="taskNumber" placeholder="Task Number">
+        </mat-form-field>
+      </div>
+      <div *ngSwitchCase="'user'">
+        <mat-form-field class="form-field-full-width">
+          <input matInput formControlName="user" placeholder="User">
+        </mat-form-field>
+      </div>
+      <div *ngSwitchCase="'group'">
+        <mat-form-field class="form-field-full-width">
+          <mat-select placeholder="Group" formControlName="group">
+            <mat-option *ngFor="let group of groups" [value]="group">
+              {{ group.groupName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngSwitchCase="'resolution'">
+        <mat-form-field class="form-field-full-width">
+          <mat-select placeholder="Resolution" formControlName="resolution">
+            <mat-option value="Approved">Approved</mat-option>
+            <mat-option value="Rejected">Rejected</mat-option>
+            <mat-option value="Negotiated">Negotiated</mat-option>
+            <mat-option value="Compensated">Compensated</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngSwitchCase="'result'">
+        <mat-form-field class="form-field-full-width">
+          <mat-select placeholder="Result" formControlName="result">
+            <mat-option value="Audit Approved">Audit Approved</mat-option>
+            <mat-option value="Approved">Approved</mat-option>
+            <mat-option value="Rejected">Rejected</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngSwitchCase="'file'">
+      </div>
+      <div *ngSwitchCase="'investigation'">
+      </div>
+      <div *ngSwitchCase="'attributes'">
+        <mat-form-field class="form-field-full-width">
+          <mat-chip-list #chipList>
+            <mat-chip *ngFor="let attribute of attributes" [selectable]="false" [removable]="true" (remove)="remove(attribute)">
+              {{attribute}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <input formControlName="attributes" placeholder="Add Attribute" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-form-field class="form-field-full-width">
+      <textarea matInput matTextareaAutosize matAutosizeMinRows="6" placeholder="Comments" formControlName="comments">
+      </textarea>
+    </mat-form-field>
+    <div style="padding-bottom: 5%">
+      <input #file type="file" [hidden]="true" (change)="uploadFile(file.files[0])">
+      <button mat-raised-button #upload (click)="file.click()">Add Attachment</button>&nbsp;
+      <span *ngIf="fileToUpload" style="font-family: 'Roboto'">{{ fileToUpload.name }}</span>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions align="center">
+  <button (click)="submitAction()" mat-raised-button color="primary" [disabled]="!actionForm.valid || (requireFile && fileToUpload == null)">
+    Submit
+  </button>
+</div>

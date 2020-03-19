@@ -1,0 +1,49 @@
+<mat-expansion-panel class="pan__card__wrapper mat-elevation-z0" [expanded]="true">
+  <mat-expansion-panel-header class="pan__card__header">
+    <mat-panel-title class="pan__card__header__title">
+      <h2>Ticket Statistics</h2>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="row">
+    <mat-card class="pan__card__wrapper" style="flex: 1; margin-right: 1.4%">
+      <mat-chip-list>
+        <mat-chip class="user-stats-chip" *ngFor="let status of statuses" color="primary" (click)="statusSelected(status.name)" [selected]="status.name === selectedStatus">{{ status.name }}</mat-chip>
+      </mat-chip-list>
+    </mat-card>
+    <mat-card class="pan__card__wrapper" style="flex: 1">
+      <mat-chip-list>
+        <mat-chip class="user-stats-chip" *ngFor="let status of statusesList" color="primary" (click)="statusSelected(status.name)"
+          [selected]="status.name === selectedStatus">{{ status.name }}</mat-chip>
+      </mat-chip-list>
+    </mat-card>
+  </div>
+  <div class="row" *ngIf="statusChartData.length > 0 && slaChartData.length > 0; else loading">
+    <div style="flex: 1; padding: 0 .7% 0 0">
+      <mat-card class="pan__card__wrapper" style="padding: 0">
+        <mat-card-header class="pan__card__header">
+          <h4 class="pan__card__header__title">Ticket Status</h4>
+        </mat-card-header>
+        <mat-card-content>
+          <canvas baseChart [options]="chartOptions" [colors]="colors" [data]="statusChartData" [labels]="statusChartLabels" [chartType]="doughnutChartType"
+            (chartClick)="chartClicked($event)">
+          </canvas>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div style="flex: 1; padding: 0 0 0 .7%">
+      <mat-card class="pan__card__wrapper" style="padding: 0">
+        <mat-card-header class="pan__card__header">
+          <h4 class="pan__card__header__title">Ticket SLAs</h4>
+        </mat-card-header>
+        <mat-card-content>
+          <canvas baseChart [options]="chartOptions" [colors]="colors" [data]="slaChartData" [labels]="slaChartLabels" [chartType]="doughnutChartType" (chartClick)="slaChartClicked($event)">
+          </canvas>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</mat-expansion-panel>
+
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
